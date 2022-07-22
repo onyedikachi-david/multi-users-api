@@ -1,41 +1,55 @@
-import { loadStdlib } from "@reach-sh/stdlib";
-import * as backend from "./build/index.main.mjs";
-
+import {loadStdlib} from '@reach-sh/stdlib';
+import * as backend from './build/index.main.mjs';
 const stdlib = loadStdlib();
+import { util } from '@reach-sh/stdlib';
+const { thread, Signal } = util;
 
-const balance = stdlib.parseCurrency(100)
+const startingBalance = stdlib.parseCurrency(100);
 
-console.log(("Creating deployer test account"))
-const deployerAcc = await stdlib.newTestAccount(balance)
+const n = 6;
 
+const conWait = 5000;
 
-const users = []
-const startUsers = async () => {
-    const newUser = async () => {
-        const acc = await stdlib.newTestAccount(balance)
-        users.push(acc)
-        console.log("New user created...")
+const go = async (ctcAdmin, sig) => {
+  const acc = (await stdlib.newTestAccount(startingBalance)).setDebugLabel('FE_API');
+  return async () => {
+    const ctc = acc.contract(backend, ctcAdmin.getInfo());
+    const f = ctc.a.User.attach;
+    await sig.wait();
+
+    const call = async (id, f) => {
+      let res = undefined;
+      await new Promise(resolve => setTimeout(resolve, conWait))
+      try { res = await f(); }
+      catch (e) { res = [`err`, e]; }
+      console.log(id);
+
     }
 
-    await newUser()
-    await newUser()
-    await newUser()
-    await newUser()
-
-    for (let index = 0; index < users.length; index++) {
-        const user = users[index];
-        console.log(`${index}: user address ==> ${JSON.stringify(user.networkAccount.addr)}`)
+    for (let i = 0; i < n; i++) {
+      await call(`API called: ${i + 1} of ${n}`, () => f());
     }
+   
+  }
 }
-const deployerCtc = deployerAcc.contract(backend)
 
-await deployerCtc.p.Deployer({
-    ready: (info) => {
-        console.warn(`
-        Contract was successfully deployed, contract info is: ${info}
-        `);
-    startUsers();
+const [ accDeloyer ] =
+  await stdlib.newTestAccounts(1, startingBalance);
 
+
+const ctcDeployer = accDeloyer.contract(backend);
+
+const ready = new Signal();
+
+await Promise.all([
+  thread(await go(ctcDeployer, ready)),
+  ctcDeployer.p.Deployer({
+    ready: async (info) => {
+      console.log(`Deployed as: ${info}`);
+      ready.notify();
     },
-})
-
+    log: (a, b, c) => console.log(`${a} ${b} ${stdlib.bigNumberToNumber(c)}`),
+   
+    // n: stdlib.bigNumberify(n),
+  }),
+]);
