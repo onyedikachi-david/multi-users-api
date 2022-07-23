@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Whitelist Dapp</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <style>
+    textarea {
+      height: 200px;
+    }
+
+    label.form-label {
+      color: #ff6680;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <div class="row my-3">
+      <div class="col-12 col-md-9 mb-3">
+        <h2>API and Parallel Reduce Bear build challenge</h2>
+      </div>
+      <div class="col-12 col-md-3 mb-3">
+        <select class="form-select" id="devnets">
+          <option selected>Choose a DevNet</option>
+          <option value="ALGO">Algorand</option>
+          <option value="CFX">Conflux</option>
+          <option value="ETH">Ethereum</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h3 class="mb-3">Deployer</h3>
+        <div class="row gx-2">
+          <div class="col-4">
+            <div class="mb-3">
+              <label class="form-label">Wallet Balance</label>
+              <input id="deployer-balance" type="text" class="form-control" disabled>
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div class="mb-3">
+              <label class="form-label">Unit</label>
+              <input type="text" class="form-control unit" value="ALGO" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+      
+            <div class="col-auto">
+              <button id="deploy-btn" type="submit" class="btn btn-secondary" disabled>Deploy</button>
+            </div>
+              
+    
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Log</label>
+          <textarea id="deployer-log" class="form-control" disabled></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Contract Information</label>
+          <input id="deployer-contract-info" type="text" class="form-control" disabled>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <h3 class="mb-3">user</h3>
+        <div class="row gx-2">
+
+          <div class="col-4">
+            <div class="mb-3">
+              <label class="form-label">Algo balance</label>
+              <input id="user-balance" type="text" class="form-control" disabled>
+            </div>
+          </div>
+  
+        </div>
+        <div class="mb-3">
+    
+            <div class="col-auto">
+              <button id="attach-btn" type="submit" class="btn btn-secondary dar" disabled>Attach</button>
+              
+            </div>
+
+        </div>
+          <label class="form-label">Log</label>
+          <textarea id="user-log" class="form-control" disabled></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@reach-sh/stdlib@latest/dist/browser/reachsdk.min.js"></script>
+
+</body>
+  <script src="webapp.mjs" type="module"></script>
+
+</html>

@@ -3,18 +3,12 @@
 
 // Level one challenge
 
-// ➔ Level 2 ($40)
-//      ◆ Use a parallelReduce
-//          ● parallelReduce is a key abstraction in Reach. It is essentially an
-//             abbreviation of a while loop combined with a fork statement that you write yourself.
-//      ◆ When a new API user attaches, increment a counter of attachers
-//      ◆ Allow participants until there are 5 in your users array
-//      ◆ Console messages
-//          ● Display a message when Alice is ready to accept Attachers
-//          ● This should be called from the backend
-//          ● Include a message when you are creating new Bob users
-//          ● Display a message each time you increment the counter
-//          ● Display a message that the user tried to attach but the max of 5 attachers has been reached
+// ➔ Level 3 ($60)
+//    ◆ Build a frontend GUI
+//    ◆ Use the framework of your choice
+//       ● It will contain as many files as you need to complete the task
+//    ◆ Use a View
+//    ◆ Be creative on a theme for your DApp!
 
 export const main = Reach.App(() => {
     const D =  Participant("Deployer", { 
@@ -24,7 +18,9 @@ export const main = Reach.App(() => {
 
      const U = API("User", {
       attach: Fun([], Null)
-     })
+     });
+
+     const V = View( { vCount: UInt, vMsg: Bytes(14) })
 
      init()
      D.publish()
@@ -33,6 +29,7 @@ export const main = Reach.App(() => {
      })
 
      const [counter] = parallelReduce([ 0 ])
+       .define(() => {V.vCount.set(counter); V.vMsg.set("API was called")})
        .invariant( balance() == 0)
        .while(counter != 5)
 
@@ -46,7 +43,10 @@ export const main = Reach.App(() => {
          
          )
       assert(counter == 5)
-     commit()
+   //   commit()
+   //   V.vCount.set(counter); 
+   //   V.vMsg.set("API was called");
      D.interact.log("Max number reached sorry, try again later", 'last count from backend:', counter)
+     commit();
      exit()
 })
