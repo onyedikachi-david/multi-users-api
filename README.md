@@ -27,7 +27,7 @@ level3 --> https://github.com/onyedikachi-david/multi-users-api/edit/level3
                   ◆ Alice should interact in an only block with this function
               ○ Include a message when you are creating new Bob users
               ○ Display your users array -->
-#1 [internal] load build definition from Dockerfile
+<!-- #1 [internal] load build definition from Dockerfile
 #1 sha256:e7b6e17114898b6232d8615e3e41e57dadf3821b87c9a7c3d5bed86cfe315854
 #1 transferring dockerfile: 38B done
 #1 DONE 0.0s
@@ -78,9 +78,9 @@ Creating 2022-07-23t14-55-33z-qbo2_reach-app-multi-users-api_run ... done
 
 Creating deployer test account
 
-        Contract was successfully deployed, contract info is: 3
+        Contract was successfully deployed, contract info is: 3 -->
         
-New user created...
+<!-- New user created...
 New user created...
 New user created...
 New user created...
@@ -88,4 +88,4 @@ New user created...
 1: user address ==> "K4DLO4BT36ZDZGCQH35ESLHES7SLP6KKEFHPU44EDIQ54A523U6P2YPKIY"
 2: user address ==> "UTBAHVNETXP532GJEQEBT433Q5NDD3BTPHHJBVVKBFGSRW7RNKOXWSC7FQ"
 3: user address ==> "Z6FLNSX6T7WRAZRFNDUSKTE7573KDCVGOUNO7OJGVA4BAWMHI67MIVDMIQ"
-
+ -->
