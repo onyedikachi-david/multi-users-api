@@ -1,8 +1,8 @@
 # multi-users-api
 Reach-lang 72 hour Challenge
 
-level2 --> https://github.com/onyedikachi-david/multi-users-api/edit/level2
-level3 --> https://github.com/onyedikachi-david/multi-users-api/edit/level3
+## level2 --> https://github.com/onyedikachi-david/multi-users-api/tree/level2
+## level3 --> https://github.com/onyedikachi-david/multi-users-api/tree/level3
 
 
 ## Level one challenge [Done]
